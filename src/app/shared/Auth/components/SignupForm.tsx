@@ -6,20 +6,24 @@ import { Card, CardBody } from "@nextui-org/card";
 import { Input } from "@nextui-org/input";
 import { Spacer } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useCallback } from "react"; // Import useCallback
 import { useForm } from "react-hook-form";
 import { ISignupForm } from "../types";
 import { useCheckUsername, useSignup } from "../hooks/query.hooks";
 import Link from "next/link";
 import { signupSchema } from "@/schemas/signup.schema";
+import debounce from "lodash/debounce"; // Import debounce from Lodash
 
 export default function SignupForm() {
   const validationSchema = signupSchema.body!;
   const router = useRouter();
 
   const { mutateAsync, isPending } = useSignup();
-  const { mutateAsync: checkUsernameMutateAsync } = useCheckUsername();
-
+  const {
+    mutateAsync: checkUsernameMutateAsync,
+    error: checkUsernameError,
+    isError,
+  } = useCheckUsername();
 
   const {
     register,
@@ -34,10 +38,20 @@ export default function SignupForm() {
     },
   });
 
+  const debouncedCheckUsername = useCallback(
+    debounce(async (username: string) => {
+      await checkUsernameMutateAsync(username);
+    }, 700),
+    []
+  );
+
   const onSubmit = async (data: ISignupForm) => {
-  
     await mutateAsync(data);
-    router.replace("/signin");
+    router.replace("/verify");
+  };
+
+  const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    debouncedCheckUsername(event.target.value);
   };
 
   return (
@@ -63,9 +77,12 @@ export default function SignupForm() {
             size="sm"
             variant="bordered"
             label="Username"
-            isInvalid={!!errors.username}
-            errorMessage={errors.username?.message}
+            isInvalid={!!errors.username || isError}
+            errorMessage={
+              errors.username?.message ?? checkUsernameError?.message
+            }
             {...register("username")}
+            onChange={handleUsernameChange} // Add onChange handler
           />
 
           <Input
@@ -89,9 +106,7 @@ export default function SignupForm() {
             Submit
           </Button>
 
-          <Link href="/signin">
-            Back to signin
-          </Link>
+          <Link href="/signin">Back to signin</Link>
         </CardBody>
       </Card>
     </Stack>
