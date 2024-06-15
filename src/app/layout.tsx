@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/context/AuthProvider";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { NextUIProvider } from "@nextui-org/react";
+import App from "./App";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,9 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <AuthProvider>
-        <body className={inter.className}>{children}</body>
-      </AuthProvider>
+      {/* <NextUIProvider> */}
+      <App>{children}</App>
+      {/* </NextUIProvider> */}
     </html>
   );
 }
