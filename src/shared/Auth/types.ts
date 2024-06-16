@@ -8,3 +8,8 @@ export interface ISignupForm {
   email: string;
   password: string;
 }
+
+export interface IVerifyEmailForm {
+  email: string;
+  OTP: string;
+}

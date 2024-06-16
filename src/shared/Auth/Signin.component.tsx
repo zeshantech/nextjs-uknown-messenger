@@ -1,5 +1,3 @@
-"use client";
-
 import Stack from "@/components/Stack";
 import SigninForm from "./components/SigninForm";
 

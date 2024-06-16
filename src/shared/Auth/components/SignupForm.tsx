@@ -6,13 +6,13 @@ import { Card, CardBody } from "@nextui-org/card";
 import { Input } from "@nextui-org/input";
 import { Spacer } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
-import React, { useCallback } from "react"; // Import useCallback
+import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { ISignupForm } from "../types";
 import { useCheckUsername, useSignup } from "../hooks/query.hooks";
 import Link from "next/link";
 import { signupSchema } from "@/schemas/signup.schema";
-import debounce from "lodash/debounce"; // Import debounce from Lodash
+import debounce from "lodash/debounce";
 
 export default function SignupForm() {
   const validationSchema = signupSchema.body!;
@@ -47,7 +47,7 @@ export default function SignupForm() {
 
   const onSubmit = async (data: ISignupForm) => {
     await mutateAsync(data);
-    router.replace("/verify");
+    router.push(`/verify/${data.email}`);
   };
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -17,11 +17,10 @@ export const authOptions: NextAuthOptions = {
         credentials: Record<"identifier" | "password", string>
       ): Promise<IUser | any> {
         await connectToDB();
-        const user = await User.get({ username: credentials.identifier });
+        const user = await User.findOne({ $or: [{ email }, { username }] });
 
         if (!user || !comparePassword(user.password, credentials.password))
           throw new Error("Invalid credentials specified");
-        if (!user.isVerified) throw new Error("Email unverified specified");
 
         return user;
       },

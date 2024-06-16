@@ -18,8 +18,13 @@ export async function POST(req: Request) {
     const isExistByUsername = await User.findOne({
       $or: [{ email }, { username }],
     });
+
     if (isExistByUsername?.isVerified) {
       throw new Error("User already exists");
+    }
+
+    if (isExistByUsername && !isExistByUsername.isVerified) {
+      await User.findByIdAndDelete(isExistByUsername._id);
     }
 
     await createUser({ username, email, password });
