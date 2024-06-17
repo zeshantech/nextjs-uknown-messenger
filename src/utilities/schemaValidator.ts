@@ -1,5 +1,4 @@
 import { ZodValidationSchema } from "zod";
-import { clone } from "lodash";
 
 export async function schemaValidator(
   schema: ZodValidationSchema,

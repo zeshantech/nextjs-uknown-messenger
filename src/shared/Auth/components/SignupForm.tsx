@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { ISignupForm } from "../types";
 import { useCheckUsername, useSignup } from "../hooks/query.hooks";
 import Link from "next/link";
-import { signupSchema } from "@/schemas/signup.schema";
+import { signupSchema } from "@/schemas/auth.schema";
 import debounce from "lodash/debounce";
 
 export default function SignupForm() {
@@ -55,11 +55,11 @@ export default function SignupForm() {
   };
 
   return (
-    <Stack>
+    <Stack width="360px">
       <Typography mb={16} variant="h2">
         Create new account
       </Typography>
-      <Card onSubmit={handleSubmit(onSubmit)} className="w-96">
+      <Card onSubmit={handleSubmit(onSubmit)} >
         <CardBody className="gap-2">
           <Input
             fullWidth

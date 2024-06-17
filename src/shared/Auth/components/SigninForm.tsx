@@ -1,6 +1,6 @@
 import Stack from "@/components/Stack";
 import Typography from "@/components/Typography";
-import { signinSchema } from "@/schemas/signin.schema";
+import { signinSchema } from "@/schemas/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@nextui-org/button";
 import { Card, CardBody } from "@nextui-org/card";
@@ -38,11 +38,11 @@ export default function SigninForm() {
   };
 
   return (
-    <Stack>
+    <Stack width="360px">
       <Typography mb={16} variant="h2">
         Signin to your account
       </Typography>
-      <Card onSubmit={handleSubmit(onSubmit)} className="w-96">
+      <Card onSubmit={handleSubmit(onSubmit)}>
         <CardBody className="gap-2">
           <Input
             fullWidth

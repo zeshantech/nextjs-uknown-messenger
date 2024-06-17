@@ -1,5 +1,5 @@
 import { User } from "@/model/user.model";
-import { verifyEmailSchema } from "@/schemas/varifyEmail.schema";
+import { verifyEmailSchema } from "@/schemas/auth.schema";
 import { schemaValidator } from "@/utilities/schemaValidator";
 
 export async function POST(request: Request) {
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
 
     await User.findOneAndUpdate({ email }, { isVerified: true });
 
-    return Response.json({ success: true, message: "Email varified" });
+    return Response.json({ success: true, message: "Email verified success" });
   } catch (error) {
     return Response.json({ success: false, message: error.message });
   }

@@ -7,7 +7,7 @@ export interface IUser extends Document {
   isVerified: boolean;
   verifyCode: string;
   verifyCodeExpiry: Date;
-  isAcceptingMessage: boolean;
+  isAcceptMessages: boolean;
 }
 
 export const userSchema: Schema<IUser> = new Schema(
@@ -32,7 +32,7 @@ export const userSchema: Schema<IUser> = new Schema(
       type: Date,
       required: true,
     },
-    isAcceptingMessage: {
+    isAcceptMessages: {
       type: Boolean,
       default: true,
     },

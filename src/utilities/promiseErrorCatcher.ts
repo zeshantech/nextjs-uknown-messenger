@@ -1,5 +1,3 @@
-import { ApiResponse } from "@/types/ApiResponse";
-
 export const promiseErrorCatcher = (
   callback: (req: Request) => Promise<Response>
 ) => {

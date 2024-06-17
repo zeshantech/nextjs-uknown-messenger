@@ -1,22 +1,24 @@
 import "next-auth";
 import { DefaultSession } from "next-auth";
 
-interface UserFields {
-    ID: string;
+declare module "next-auth" {
+  interface UserFields {
+    _id: string;
     username: string;
-    isAcceptingMessage: boolean;
+    isAcceptMessages: boolean;
     isVerified: boolean;
     createdAt: Date;
-}
+  }
 
-declare module "next-auth" {
-    interface User extends UserFields {}
-    
-    interface Session {
-        user: UserFields & DefaultSession["user"];
-    }
+  interface User extends UserFields {}
+
+  type SessionUser = UserFields & DefaultSession["user"];
+
+  interface Session {
+    user: SessionUser;
+  }
 }
 
 declare module "next-auth/jwt" {
-    interface JWT extends UserFields {}
+  interface JWT extends UserFields {}
 }

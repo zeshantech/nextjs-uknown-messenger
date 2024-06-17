@@ -29,11 +29,11 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        const { ID, isVerified, isAcceptingMessage, username } = user;
+        const { _id, isVerified, isAcceptMessages, username } = user;
         Object.assign(token, {
-          ID: ID.toString(),
+          _id: _id.toString(),
           isVerified,
-          isAcceptingMessage,
+          isAcceptMessages,
           username,
         });
       }
@@ -41,11 +41,11 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       if (token) {
-        const { ID, isVerified, isAcceptingMessage, username } = token;
+        const { _id, isVerified, isAcceptMessages, username } = token;
         Object.assign(session.user, {
-          ID,
+          _id,
           isVerified,
-          isAcceptingMessage,
+          isAcceptMessages,
           username,
         });
       }

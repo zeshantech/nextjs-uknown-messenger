@@ -1,5 +1,5 @@
 import { User } from "@/model/user.model";
-import { checkUsernameSchema } from "@/schemas/checkUsername.schema";
+import { checkUsernameSchema } from "@/schemas/auth.schema";
 import { schemaValidator } from "@/utilities/schemaValidator";
 
 export async function GET(request: Request) {

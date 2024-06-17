@@ -37,6 +37,6 @@ export default async function apiCaller(
   } catch (error) {
     if (axios.isAxiosError(error)) console.error(error.message);
     else console.error("Unexpected error:", error);
-    throw new Error(error);
+    // throw new Error(error);
   }
 }

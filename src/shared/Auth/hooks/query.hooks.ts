@@ -46,6 +46,9 @@ export function useVerifyEmail() {
     mutationFn: async (data: IVerifyEmailForm) => {
       return apiCaller("POST", "/verify-email", data);
     },
+    onSuccess: (data) => {
+      showToast(data.message, "success");
+    },
     onError: (error) => {
       showToast(error.message, "error");
     },

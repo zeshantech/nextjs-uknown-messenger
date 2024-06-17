@@ -8,6 +8,7 @@ interface TypographyProps {
   className?: string;
   align?: "left" | "center" | "right";
   mb?: number;
+  color?: string; // Add color property
 }
 
 const alignStyles: Record<string, string> = {
@@ -30,12 +31,13 @@ const Typography: React.FC<TypographyProps> = ({
   align = "left",
   className = "",
   mb = 0,
+  color, // Destructure color prop
 }) => {
   const Component = variant === "body" || variant === "caption" ? "p" : variant;
   return (
     <Component
       className={`${variantStyles[variant]} ${alignStyles[align]} ${className}`}
-      style={{ marginBottom: mb }}
+      style={{ marginBottom: mb, color }} // Apply color in style
     >
       {children}
     </Component>
