@@ -1,6 +1,6 @@
 "use client";
 
-import SignupComponent from "@/shared/Auth/Signup.component";
+import SignupComponent from "@/shared/Auth/SignupComponent";
 import React from "react";
 
 export default function Page() {

@@ -17,12 +17,6 @@ type ToastContextType = {
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
 export default function ToastProvider({ children }: { children: ReactNode }) {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
   const showToast = (message: string, variant: ToastVariant = "success") => {
     switch (variant) {
       case "error":
@@ -39,7 +33,7 @@ export default function ToastProvider({ children }: { children: ReactNode }) {
 
   return (
     <ToastContext.Provider value={{ showToast }}>
-      {isClient ? <Toaster /> : null}
+      <Toaster />
       {children}
     </ToastContext.Provider>
   );

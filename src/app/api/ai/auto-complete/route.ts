@@ -1,35 +1,20 @@
-import OpenAI from "openai";
-import { StreamingTextResponse, OpenAIStream } from "ai";
-
-// Create an OpenAI API client
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+import { generateText } from "ai";
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
+import { google } from "@/lib/gemini";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const message = searchParams.get("message")!;
 
-  console.log(message, "——————————————");
-  
+  const prompt = `Hi Gemini,I'm using you as auto predection of message so kindly dont return any unexpected response you should work as an auto-prediction system to suggest the next 2 and 3 words based on the following message: "${message}" as in gmail or in word, just return response in 3 to 4 words of predective message and dont return it in options`;
 
-  // Ask OpenAI for a streaming chat completion given the prompt
-  const response = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
-    stream: true,
-    max_tokens: 80,
-    messages: [
-      {
-        role: "system",
-        content: message,
-      },
-    ],
+  const { text } = await generateText({
+    model: google("models/gemini-1.5-pro-latest"),
+    prompt,
+    maxTokens: 8,
   });
 
-  console.log(response, "€€€€€€€€€€€€€€");
-  
-  
-  const stream = OpenAIStream(response);
-  console.log(response);
-  return new StreamingTextResponse(stream);
+  return new Response(JSON.stringify({ text }), {
+    headers: { "Content-Type": "application/json" },
+  });
 }
