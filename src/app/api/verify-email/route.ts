@@ -1,9 +1,9 @@
+import { connectToDB } from "@/lib/connectToDB";
 import { User } from "@/model/user.model";
-import { verifyEmailSchema } from "@/schemas/auth.schema";
-import { schemaValidator } from "@/utilities/schemaValidator";
 
 export async function POST(request: Request) {
   try {
+    await connectToDB();
     // await schemaValidator(verifyEmailSchema, request);
     const { email, OTP } = await request.json();
 

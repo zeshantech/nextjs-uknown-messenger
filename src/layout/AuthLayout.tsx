@@ -11,6 +11,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
     <Fragment>
       <Appbar />
 
+
       {children}
     </Fragment>
   );

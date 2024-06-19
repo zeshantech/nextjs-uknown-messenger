@@ -13,6 +13,7 @@ import { ISigninForm } from "../types";
 import SocialSigninButtons from "./SocialSigninButtons";
 import { useSignin } from "../hooks/query.hooks";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 export default function SigninForm() {
   const validationSchema = signinSchema.body!;
@@ -43,6 +44,7 @@ export default function SigninForm() {
         Signin to your account
       </Typography>
       <Card onSubmit={handleSubmit(onSubmit)}>
+        <Button onClick={() => signIn()}>Click to auth</Button>
         <CardBody className="gap-2">
           <Input
             fullWidth
@@ -74,9 +76,7 @@ export default function SigninForm() {
             Submit
           </Button>
 
-          <Link href="/signup">
-            Create new account
-          </Link>
+          <Link href="/signup">Create new account</Link>
         </CardBody>
       </Card>
       <Spacer y={4} />

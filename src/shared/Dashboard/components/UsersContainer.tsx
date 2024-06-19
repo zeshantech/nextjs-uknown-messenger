@@ -14,7 +14,7 @@ interface AppProps {
 export default function App({ onClickUser }: AppProps) {
   const { data, fetchNextPage, hasNextPage } = useGetUsers();
 
-  const users = data?.pages.map((page) => page.users).flat() || [];
+  const users = data?.pages.map((page) => page?.users).flat().filter(e=>e) || [];
 
   return (
     <Card>
@@ -24,6 +24,7 @@ export default function App({ onClickUser }: AppProps) {
         buttons={[
           <Button
             variant="light"
+            key={1}
             onClick={() => fetchNextPage()}
             disabled={!hasNextPage}
             color="primary"
@@ -36,6 +37,7 @@ export default function App({ onClickUser }: AppProps) {
         <Stack direction="row" gap={16} wrap="wrap">
           {users.map((user) => (
             <Avatar
+              key={user!._id}
               size="lg"
               name={user!.username}
               onClick={() => onClickUser(user!)}

@@ -5,6 +5,8 @@ import apiCaller from "@/common/apiCaller";
 import { useToast } from "@/context/ToastProvider";
 
 export function useSignin() {
+  const { showToast } = useToast();
+
   return useMutation({
     mutationFn: async (data: ISigninForm) => {
       return signIn("credentials", {
@@ -13,11 +15,18 @@ export function useSignin() {
         password: data.password,
       });
     },
+    onSuccess: () => {
+      showToast("Navigating to dashboard", "success");
+    },
+    onError: (error) => {
+      showToast(error.message, "error");
+    },
   });
 }
 
 export function useSignup() {
   const { showToast } = useToast();
+
   return useMutation({
     mutationFn: async (data: ISignupForm) => {
       return apiCaller("POST", "/signup", data);

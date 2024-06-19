@@ -1,15 +1,15 @@
 import { connectToDB } from "@/lib/connectToDB";
 import { Message } from "@/model/message.model";
 import { User } from "@/model/user.model";
+import { authenticator } from "@/helpers/authenticator";
 
 export async function POST(request: Request) {
   try {
-    await connectToDB()
+    await connectToDB();
     // TODO: will fix
     // await schemaValidator(sendMessagesSchema, request);
 
-    // TODO: comment for development purpose
-    // await authenticator();
+    await authenticator();
     const { userId, content } = await request.json();
 
     const user = await checkUserAndStatus(userId);

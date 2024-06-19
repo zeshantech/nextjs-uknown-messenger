@@ -17,7 +17,10 @@ export const authOptions: NextAuthOptions = {
         credentials: Record<"identifier" | "password", string>
       ): Promise<IUser | any> {
         await connectToDB();
-        const user = await User.findOne({ $or: [{ email }, { username }] });
+        const { identifier } = credentials;
+        const user = await User.findOne({
+          $or: [{ email: identifier }, { username: identifier }],
+        });
 
         if (!user || !comparePassword(user.password, credentials.password))
           throw new Error("Invalid credentials specified");

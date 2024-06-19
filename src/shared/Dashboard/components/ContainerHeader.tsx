@@ -2,6 +2,7 @@ import { Stack, Typography } from "@/components";
 import { AvatarProps } from "@nextui-org/avatar";
 import { ButtonProps } from "@nextui-org/button";
 import { CardHeader } from "@nextui-org/card";
+import { Checkbox, Switch } from "@nextui-org/react";
 import React, { ReactElement, cloneElement } from "react";
 
 interface ContainerHeaderProps {

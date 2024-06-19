@@ -7,8 +7,10 @@ import {
 } from "@nextui-org/react";
 import { AppLogo } from "@/assets";
 import { Typography } from "@/components";
-import AppbarMenu from "./AppbarMenu";
-import { FeedbackModel } from ".";
+import AppbarMenu from "./components/AppbarMenu";
+import "feeder-react-feedback/dist/feeder-react-feedback.css"; // import stylesheet
+import MessagePreferenceModal from "./components/MessagePreferenceModal";
+import { Checkbox, Divider, Switch } from "@nextui-org/react";
 
 export default function Appbar() {
   const { isOpen, onClose, onOpen } = useDisclosure();
@@ -17,12 +19,13 @@ export default function Appbar() {
     <Navbar as={"div"} style={navbarStyle}>
       <NavbarBrand className="mr-4">
         <AppLogo />
-        <Typography variant="h3">ACME</Typography>
+        <Typography variant="h3">Veil Voice</Typography>
       </NavbarBrand>
-      <FeedbackModel onClose={onClose} isOpen={isOpen} />
+
+      <MessagePreferenceModal onClose={onClose} isOpen={isOpen} />
 
       <NavbarContent justify="end">
-        <AppbarMenu onFeedback={onOpen} />
+        <AppbarMenu onMessagePreference={onOpen} />
       </NavbarContent>
     </Navbar>
   );

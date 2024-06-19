@@ -37,23 +37,6 @@ export function useGetMessages() {
   });
 }
 
-export function seDeleteMessage() {
-  return useInfiniteQuery({
-    queryKey: ["my-messages"],
-    queryFn: async ({ pageParam }) => {
-      const response = await apiCaller("GET", "/get-messages", undefined, {
-        page: pageParam,
-        limit: 10,
-      });
-      return response;
-    },
-    initialPageParam: 1,
-    getNextPageParam: (lastPage, pages) => {
-      return lastPage?.message === "nomore" ? undefined : pages.length;
-    },
-  });
-}
-
 export function usePrediction() {
   // TODO: just for testing purpose will remove in production
   const { showToast } = useToast();

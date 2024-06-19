@@ -26,8 +26,7 @@ export default function MessagesContainer() {
     if (result.success) refetch();
   };
 
-  const messages =
-    messagesData?.pages.map((page) => page.messages).flat() || [];
+  const messages = messagesData?.pages.map((page) => page?.messages).flat().filter((e) => e) || [];
 
   return (
     <Stack>
@@ -36,10 +35,11 @@ export default function MessagesContainer() {
           subTitle={"Here is list of all messages thats other users send you"}
           title={"Messages list"}
           buttons={[
-            <Button isIconOnly onClick={() => refetch()}>
+            <Button isIconOnly onClick={() => refetch()} key={1}>
               <CIcon icon={cilReload} height={16} />
             </Button>,
             <Button
+              key={2}
               variant="light"
               color="primary"
               onClick={() => fetchNextPage()}

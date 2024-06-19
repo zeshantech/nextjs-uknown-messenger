@@ -9,8 +9,7 @@ export async function GET(request: Request) {
   try {
     await connectToDB();
     await schemaValidator(getUsersSchema, request);
-    // const { _id: userId } = await authenticator();
-    const userId = "66716706a5af688b934e5999";
+    const { _id: userId } = await authenticator();
 
     const { searchParams } = new URL(request.url);
     const page = +searchParams.get("page")!;

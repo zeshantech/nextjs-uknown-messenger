@@ -9,10 +9,10 @@ import { signOut } from "next-auth/react";
 import React, { CSSProperties } from "react";
 
 interface AppbarMenuProps {
-  onFeedback: () => void;
+  onMessagePreference: () => void;
 }
 
-export default function AppbarMenu({ onFeedback }: AppbarMenuProps) {
+export default function AppbarMenu({ onMessagePreference }: AppbarMenuProps) {
   const handleLogout = async () => {
     await signOut();
     window.location.reload();
@@ -27,8 +27,8 @@ export default function AppbarMenu({ onFeedback }: AppbarMenuProps) {
         />
       </DropdownTrigger>
       <DropdownMenu variant="flat" style={styledMenu}>
-        <DropdownItem key="help_and_feedback" onClick={onFeedback}>
-          Help & Feedback
+        <DropdownItem onClick={onMessagePreference} key="messagePreference">
+          Message Preferences
         </DropdownItem>
         <DropdownItem onClick={handleLogout} key="logout" color="danger">
           Log Out

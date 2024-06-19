@@ -7,6 +7,9 @@ import { NextUIProvider } from "@nextui-org/system";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import React, { ReactNode, useEffect, useState } from "react";
+import Feedback from "feeder-react-feedback"; // import Feedback component
+
+const feederId = process.env.FEEDER_PROJECT_ID!;
 
 export default function App({ children }: { children: ReactNode }) {
   const queryClient = new QueryClient();
@@ -26,7 +29,12 @@ export default function App({ children }: { children: ReactNode }) {
       <NextUIProvider>
         <ToastProvider>
           <AuthProvider>
-            <AuthLayout>{children}</AuthLayout>
+            <AuthLayout>
+              <div className="text-black">
+                <Feedback email projectId={feederId} />
+              </div>
+              {children}
+            </AuthLayout>
           </AuthProvider>
         </ToastProvider>
       </NextUIProvider>
