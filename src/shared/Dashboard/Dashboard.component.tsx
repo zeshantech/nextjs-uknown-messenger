@@ -2,7 +2,6 @@ import React from "react";
 import { MessagesContainer, UserContainerTabs } from "./components";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { Stack } from "@/components";
-import { Tabs } from "@nextui-org/tabs";
 
 export default function DashboardComponent() {
   const isLargeScreen = useMediaQuery("(min-width: 890px)");
@@ -13,8 +12,7 @@ export default function DashboardComponent() {
         <UserContainerTabs />
       </Stack>
       <Stack flex={1}>
-      <MessagesContainer />
-        {/* <UserContainerTabs /> */}
+        <MessagesContainer />
       </Stack>
     </Stack>
   );

@@ -1,11 +1,9 @@
 import { ConfirmationModel, OtpInput, Stack, Typography } from "@/components";
 import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardFooter } from "@nextui-org/card";
-import { Modal, ModalBody, ModalFooter, useModal } from "@nextui-org/modal";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React from "react";
 import { useSendVerificationEmail, useVerifyEmail } from "../hooks/query.hooks";
-import { LoaderIcon } from "react-hot-toast";
 import { useDisclosure } from "@nextui-org/react";
 import CIcon from "@coreui/icons-react";
 import { cilWarning } from "@coreui/icons";
@@ -15,7 +13,7 @@ export default function VerifyEmailForm() {
   let { email } = useParams<{ email: string }>();
   email = email.replace("%40", "@");
   const { isOpen, onClose, onOpen } = useDisclosure();
-
+  
   const { mutateAsync, isPending } = useVerifyEmail();
   const {
     mutateAsync: sendVerificationEmailMutateAsync,

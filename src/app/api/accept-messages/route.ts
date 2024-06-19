@@ -3,6 +3,7 @@ import { User } from "@/model/user.model";
 
 export async function POST(req: Request) {
   try {
+    
     const user = await authenticator();
     const { isAcceptMessages } = await req.json();
 
