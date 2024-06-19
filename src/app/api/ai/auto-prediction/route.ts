@@ -1,8 +1,11 @@
 import { generateText } from "ai";
-import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { google } from "@/lib/gemini";
+import { autoPredictionSchema } from "@/schemas/message.schema";
+import { schemaValidator } from "@/utilities/schemaValidator";
 
 export async function GET(request: Request) {
+  await schemaValidator(autoPredictionSchema, request);
+
   const { searchParams } = new URL(request.url);
   const message = searchParams.get("message")!;
 

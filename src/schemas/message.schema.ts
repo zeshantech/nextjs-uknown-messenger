@@ -14,14 +14,26 @@ export const acceptMessagesSchema = {
 
 export const getMessagesSchema = {
   query: z.object({
-    page: z.number(),
-    limit: z.number(),
+    page: z.string(),
+    limit: z.string(),
   }),
 };
 
 export const sendMessagesSchema = {
   body: z.object({
-    username: z.string(),
+    userId: z.string(),
     content: z.string(),
+  }),
+};
+
+export const autoPredictionSchema = {
+  query: z.object({
+    message: z.string(),
+  }),
+};
+
+export const deleteMessageSchema = {
+  query: z.object({
+    _id: z.string(),
   }),
 };

@@ -13,6 +13,10 @@ interface StackProps {
   screenHeight?: boolean; // Full screen height
   width?: string; // Width in CSS units
   fullWidth?: boolean; // Full screen width
+  overflowX?: "visible" | "hidden" | "scroll" | "auto"; // Horizontal overflow
+  overflowY?: "visible" | "hidden" | "scroll" | "auto"; // Vertical overflow
+  flex?: number; // Flex value
+  bgColor?: string; // Background color
   children: ReactNode;
 }
 
@@ -29,6 +33,10 @@ const Stack: React.FC<StackProps> = ({
   screenHeight = false, // Default to not full screen height
   width, // Width in CSS units
   fullWidth = false, // Default to not full screen width
+  overflowX = "visible", // Default horizontal overflow
+  overflowY = "visible", // Default vertical overflow
+  flex = 1, // Default flex value
+  bgColor = "transparent", // Default background color
   children,
 }) => {
   const directionClass = direction === "column" ? "flex-col" : "flex-row";
@@ -85,6 +93,10 @@ const Stack: React.FC<StackProps> = ({
         gap: `${gap}px`,
         height: screenHeight ? "100vh" : height,
         width: fullWidth ? "100vw" : width,
+        overflowX: overflowX,
+        overflowY: overflowY,
+        flex: flex,
+        backgroundColor: bgColor,
       }}
     >
       {children}
